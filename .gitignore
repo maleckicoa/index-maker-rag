@@ -1,0 +1,20 @@
+# Ignore SQLite database files
+*.db
+*.sql
+
+# Ignore Python bytecode files
+__pycache__/
+*.pyc
+
+# Ignore Poetry lock file
+poetry.lock
+
+# Ingore environment file
+.env
+
+# Ignore pickle files
+*.pkl
+
+.venv/
+
+files/

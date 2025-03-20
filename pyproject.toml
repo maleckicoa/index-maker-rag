@@ -1,0 +1,49 @@
+[tool.poetry]
+name = "FMP_DATA"
+version = "0.1.0"
+description = ""
+authors = ["Aleksa Mihajlovic <mihajlovic.aleksa@gmail.com>"]
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.11"
+requests = "2.32.3"
+aiohttp = "^3.11.9"
+nest-asyncio = "^1.6.0"
+fmp-py = "0.0.20.3"
+pymongo = "^4.10.1"
+more-itertools = "^10.5.0"
+ordered-set = "^4.1.0"
+python-dotenv = "^1.0.1"
+neo4j = "^5.27.0"
+asyncio = "3.4.3"
+fastapi = "0.109.0"
+langchain = "^0.1.0"
+langchain-openai = "^0.0.2"
+langchainhub = "^0.1.14"
+numpy ="1.26.2"
+openai = "1.55.3"
+opentelemetry-api = "1.28.1"
+pydantic = "2.10.2"
+uvicorn = "0.25.0"
+httpx = "0.28.0"
+chromadb = "0.4.22"
+psycopg2 = "^2.9.10"
+polars = {extras = ["all"], version = "^1.18.0"}
+pyarrow = "^18.1.0"
+scipy = "^1.14.1"
+matplotlib = "^3.10.0"
+openpyxl = "^3.1.5"
+streamlit = "^1.41.1"
+gunicorn = "^23.0.0"
+fpdf = "^1.7.2"
+
+[tool.poetry.group.dev.dependencies]
+ipykernel = "^6.29.5"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.mypy]
+python_version = "3.11"

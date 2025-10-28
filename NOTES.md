@@ -4,7 +4,7 @@ DETACH DELETE n;
 
 
 Kill the process on Port
-lsof -i :800
+lsof -i :8080
 kill -9 91850
  
 

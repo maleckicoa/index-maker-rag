@@ -14,18 +14,24 @@ import traceback
 
 from custom_css import get_css
 from utils.frontend_utils import make_df
+from dotenv import load_dotenv
 
-CHATBOT_URL = os.getenv("CHATBOT_URL", "http://localhost:800/index-rag-agent")
+
+env_path = os.path.join(os.path.dirname(__file__), '..', '.env')
+load_dotenv(dotenv_path=env_path)
+
+CHATBOT_URL = os.getenv("CHATBOT_URL", "http://localhost:8080/index-rag-agent")
+print("CHATBOT_URL", CHATBOT_URL)
 
 
 def get_path(relative_path):
     return os.path.abspath(os.path.join(os.path.dirname(__file__), relative_path))
 
 # Define file paths
-logo_path = get_path("../files/.png")
-logo_path_small = get_path("../files/_small.png")
-logo_path_small_sky = get_path("../files/_small_sky.png")
-logo_path_small_blue = get_path("../files/_small_blue.png")
+logo_path = get_path("../files/site-logo.png")
+logo_path_small = get_path("../files/site-logo-small.png")
+logo_path_small_sky = get_path("../files/site-logo-small-sky.png")
+logo_path_small_blue = get_path("../files/site-logo-small-blue.png")
 data_pdf_path = get_path("../files/stock_data.pdf")
 stock_info_final_path = get_path("../files/stock_info_final.pkl")
 industry_list_path = get_path("../chatbot_api/src/chains/")
@@ -41,10 +47,8 @@ sys.path.append(industry_list_path)
 from cypher_query_examples import industries
 
 
-
-
 st.set_page_config(
-    page_title="",
+    page_title="Indexing Chatbot",
     page_icon=logo_path,
     layout="wide")
 
@@ -63,7 +67,7 @@ with st.sidebar:
     st.header("About")
     st.markdown(
         """
-         Indexing Chatbot is an AI agent designed to help you create custom-tailored financial indices.
+        Indexing Chatbot is an AI agent designed to help you create custom-tailored financial indices.
         It leverages Retrieval-Augmented Generation (RAG) to analyze both structured and unstructured (textual) financial data.
         With this chatbot you can:  
         - Obtain suggestions for your customized stock index  
@@ -75,7 +79,7 @@ with st.sidebar:
     
     st.markdown("""</br>""", unsafe_allow_html=True )
     st.header("How to use this chatbot?")
-    st.markdown("""Type the prompt in the chat window on the right.  Chatbot accepts **3 types of prompts:**""")
+    st.markdown("""Type the prompt in the chat window on the right. Indexing Chatbot accepts **3 types of prompts:**""")
     
 ########################
     st.markdown("""
@@ -168,7 +172,7 @@ with st.sidebar:
     st.markdown("""</br>""", unsafe_allow_html=True )
     st.header("Implementation Details")
     st.markdown("""
-    -  Chatbot has access to financial data for ~14000 stocks from around the world with largest trading volume.  
+    - Indexing Chatbot has access to financial data for ~14000 stocks from around the world with largest trading volume.  
     - Financial data available at the moment: country, sector, industry, exchange, trading volume, average return, volatility, market capitalization, and beta values
     - In addition, in order to build the indices the chatbot has access to historical stock prices, and market capitalization since 2014
     - All prices are expressed in EUR
@@ -239,7 +243,7 @@ with col2:
     st.markdown(
         """
         <div style="display: flex; align-items: flex-end; height: 100px; margin-top: -5px;">
-            <h1 style="margin: 0; padding: 0; line-height: 1;"> - Indexing Chatbot</h1>
+            <h1 style="margin: 0; padding: 0; line-height: 1;">Indexing Chatbot</h1>
             <span style="font-size: 14px; color: white; background-color: #ff9800; border-radius: 5px; padding: 2px 8px;  align-self: center; ">
                 Beta
             </span>
@@ -325,6 +329,8 @@ if prompt := st.chat_input("What do you want to know?"):
             result = response_json.get("result", "")
             tickers = response_json.get("tickers", [])
         else:
+            print("ERROR", response.status_code)
+            print("ERROR", response.text)
             output_text = "An error occurred while processing your message. Please try again."
             intermediate_steps = ""
             result = ""

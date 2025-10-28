@@ -2,6 +2,7 @@ import os
 import sys
 
 parent_dir = os.path.abspath(os.path.join(os.getcwd(), "../../"))
+
 if parent_dir not in sys.path:
     sys.path.append(parent_dir)
 
@@ -87,12 +88,12 @@ chat_model = ChatOpenAI(
 system_prompt = SystemMessagePromptTemplate(
     prompt=PromptTemplate(
         input_variables=[],
-        template="""You are  Indexing Chatbot, an AI assistant helping the user to create a customized financial index.
+        template="""You are Indexing Chatbot, an AI assistant helping the user to create a customized financial index.
 
         - **If the user says he/she wants to create an index, point the user to the left panel, and mention that the instructions for creating an index are there.**
         - **If the user needs help or assistance (e.g can you help me?), introduce yourself and advise the user to read the instructions in the left panel.**
         - **If the user is having a conversation about finance or index creation, try to reply in a useful maner.**
-        - **If the user greets you (e.g. hi, hello) reply by using a slight variation of this sentence: 'Hello! My name is  Indexing Chatbot. How can I assist? \n\n'.**
+        - **If the user greets you (e.g. hi, hello) reply by using a slight variation of this sentence: 'Hello! My name is Indexing Chatbot. How can I assist? \n\n'.**
         - **If the user askes a non-financial question (e.g. what is the weather today?) politely reply by saying that you can only respond to questions about index making**
         - **If the user writes a non-sensical prompt (e.g. n08q0 whaw0man jdbfkj), politely respond by saying that you didn't understand the prompt.**
 
@@ -124,13 +125,11 @@ index_agent_prompt = ChatPromptTemplate(
     validate_template=False
 )
 
-
 index_rag_agent = create_openai_functions_agent(
     llm=chat_model,
     prompt=index_agent_prompt,
     tools=tools
 )
-
 
 index_rag_agent_executor = AgentExecutor(
     agent=index_rag_agent,

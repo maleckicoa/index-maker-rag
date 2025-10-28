@@ -38,7 +38,9 @@ async def get_status():
 
 
 chat_memory_store = {}
+
 @app.post("/index-rag-agent", response_model=IndexQueryOutput)
+@app.post("/index-rag-agent/", response_model=IndexQueryOutput)
 async def query_index_agent(query: IndexQueryInput) -> IndexQueryOutput:
     
     user_id = "default_user" 
@@ -67,7 +69,7 @@ async def query_index_agent(query: IndexQueryInput) -> IndexQueryOutput:
     except:        
         print("Timeout occurred. Restarting Uvicorn...")
 
-        port = 800
+        port = 8080
         restart_application()
         kill_process_on_port(port)
         free_port(port)

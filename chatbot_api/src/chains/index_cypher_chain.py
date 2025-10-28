@@ -125,8 +125,6 @@ cypher_generation_prompt = PromptTemplate(
 )
 
 
-
-
 qa_generation_template = """You are an assistant that takes the results from a Neo4j Cypher query and simply returns the response. 
 The Query Results section contains the results of a Cypher query that was generated based on a users natural language question.  
 You must never doubt that information or try to use your internal knowledge to correct it. 
@@ -150,8 +148,8 @@ current_time = time.time()
 human_readable_time = time.ctime(current_time)
 word_count = len(cypher_generation_template.split())
 print('Cypher Agent')
-print('Human readible time', human_readable_time)
-print(f"Word count: {word_count}")
+# print('Human readible time', human_readable_time)
+# print(f"Word count: {word_count}")
 
 
 index_cypher_chain= GraphCypherQAChain.from_llm(

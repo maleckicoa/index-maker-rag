@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "FMP_DATA"
+name = "index-maker-rag"
 version = "0.1.0"
 description = ""
 authors = ["Aleksa Mihajlovic <mihajlovic.aleksa@gmail.com>"]
@@ -28,7 +28,7 @@ pydantic = "2.10.2"
 uvicorn = "0.25.0"
 httpx = "0.28.0"
 chromadb = "0.4.22"
-psycopg2 = "^2.9.10"
+psycopg2-binary = "^2.9.10"
 polars = {extras = ["all"], version = "^1.18.0"}
 pyarrow = "^18.1.0"
 scipy = "^1.14.1"

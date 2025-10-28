@@ -5,7 +5,7 @@ start_time = time.time()
 
 print('TEST')
 
-url = "http://127.0.0.1:800/index-rag-agent"  
+url = "http://127.0.0.1:8080/index-rag-agent"  
 
 inputs = "Suggest a mix of 10 european stocks with high volatility and 10 chinese stocks in technology sector with high beta and some german companies in financial sector, and at least 3 italian companies with moderate beta?"
 

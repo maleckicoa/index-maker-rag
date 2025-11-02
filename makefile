@@ -1,4 +1,4 @@
-.PHONY: st uvi guni
+.PHONY: st uvi uvi_reload scheduler
 
 
 st:
@@ -10,14 +10,7 @@ uvi:
 	PYTHONPATH=chatbot_api/src poetry run uvicorn main:app --host 0.0.0.0 --port 8080
 
 uvi_reload:
-	PYTHONPATH=chatbot_api/src poetry run uvicorn main:app --host 0.0.0.0 --port 8080 --reload --reload-dir /Users/aleksamihajlovic/Documents/index-maker-rag
+	PYTHONPATH=chatbot_api/src poetry run uvicorn main:app --host 0.0.0.0 --port 8080 --reload 
 
-guni:
-	PYTHONPATH=chatbot_api/src poetry run gunicorn main:app \
-	    -k uvicorn.workers.UvicornWorker \
-	    --bind 0.0.0.0:8080 \
-	    --workers 3 \
-	    --timeout 52 \
-	    --reload
-
- 
+neo4j_fresh:
+	PYTHONPATH=. poetry run python -m index_maker.neo4j_fresh

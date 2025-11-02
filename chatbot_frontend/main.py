@@ -21,8 +21,6 @@ env_path = os.path.join(os.path.dirname(__file__), '..', '.env')
 load_dotenv(dotenv_path=env_path)
 
 CHATBOT_URL = os.getenv("CHATBOT_URL", "http://localhost:8080/index-rag-agent")
-print("CHATBOT_URL", CHATBOT_URL)
-
 
 def get_path(relative_path):
     return os.path.abspath(os.path.join(os.path.dirname(__file__), relative_path))
@@ -50,7 +48,8 @@ from cypher_query_examples import industries
 st.set_page_config(
     page_title="Indexing Chatbot",
     page_icon=logo_path,
-    layout="wide")
+    layout="wide",
+    initial_sidebar_state="expanded")
 
 #st.write("DEBUG:",industries )
 
@@ -58,9 +57,6 @@ st.set_page_config(
 ######################################################################################################################
 ######################################################################################################################
 ###################################################################################################################### LEFT PANEL
-
-import streamlit as st
-
 
 
 with st.sidebar:
@@ -256,6 +252,28 @@ with col2:
 
 st.markdown(get_css(), unsafe_allow_html=True) ########## CSS IMPORT
 
+# Ensure sidebar is open by default on desktop
+st.markdown("""
+<script>
+(function() {
+    // Open sidebar by default on desktop
+    if (window.innerWidth >= 768) {
+        const sidebarButton = document.querySelector('button[aria-label*="sidebar"], button[aria-label*="menu"]');
+        const sidebar = document.querySelector('[data-testid="stSidebar"]');
+        if (sidebar && sidebar.getAttribute('aria-expanded') !== 'true') {
+            // Force sidebar open
+            if (sidebarButton) {
+                sidebarButton.click();
+            }
+            // Also set it directly
+            sidebar.setAttribute('aria-expanded', 'true');
+            sidebar.style.transform = 'none';
+        }
+    }
+})();
+</script>
+""", unsafe_allow_html=True)
+
 
 
 st.info("""
@@ -329,8 +347,6 @@ if prompt := st.chat_input("What do you want to know?"):
             result = response_json.get("result", "")
             tickers = response_json.get("tickers", [])
         else:
-            print("ERROR", response.status_code)
-            print("ERROR", response.text)
             output_text = "An error occurred while processing your message. Please try again."
             intermediate_steps = ""
             result = ""

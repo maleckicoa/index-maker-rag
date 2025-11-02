@@ -37,6 +37,7 @@ openpyxl = "^3.1.5"
 streamlit = "^1.41.1"
 gunicorn = "^23.0.0"
 fpdf = "^1.7.2"
+apscheduler = "^3.10.4"
 
 [tool.poetry.group.dev.dependencies]
 ipykernel = "^6.29.5"

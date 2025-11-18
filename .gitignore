@@ -18,3 +18,5 @@ poetry.lock
 .venv/
 
 files/
+
+**/.DS_Store
